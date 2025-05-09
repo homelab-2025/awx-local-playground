@@ -11,7 +11,7 @@ AWX_NAME="awx-demo"
 param=$1
 
 case $param in
-	deploy)
+	deploy-awx)
 		echo "[*] Clean up if awx repository already cloned"
 		[ -d "awx-operator" ] && rm -rf awx-operator
 
@@ -50,7 +50,10 @@ EOF
 		echo "[*] Applying manifests..."
 		kubectl apply -k .
 		;;
-	pods-status)
+	deploy-hosts)
+		kubectl apply -f deploy-hosts.yaml -n awx
+		;;
+	k8s-status)
 		watch kubectl get all
 		;;
 	awx-status)

@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container-a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container-a
+  template:
+    metadata:
+      labels:
+        app: container-a
+    spec:
+      containers:
+      - name: ubuntu-ssh
+        image: enzo2346/ubuntu-ssh
+        ports:
+        - containerPort: 22
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-a
+spec:
+  selector:
+    app: container-a
+  ports:
+  - protocol: TCP
+    port: 22
+    targetPort: 22
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container-b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container-b
+  template:
+    metadata:
+      labels:
+        app: container-b
+    spec:
+      containers:
+      - name: ubuntu-ssh
+        image: enzo2346/ubuntu-ssh
+        ports:
+        - containerPort: 22
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-b
+spec:
+  selector:
+    app: container-b
+  ports:
+  - protocol: TCP
+    port: 22
+    targetPort: 22
