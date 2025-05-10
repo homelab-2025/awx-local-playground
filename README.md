@@ -7,8 +7,9 @@ This guide will walk you through setting up AWX, the web-based user interface fo
 - A working Kubernetes cluster 
 
 (e.g., Minikube, Docker Desktop with Kubeadm ... but not a Kind cluster which require additionnal configuration)
-- `kubectl` configured for your cluster
+- `kubectl` installed and configured for your cluster
 - `git` installed
+- `uv`installed (Optional)
 
 ## Script Overview
 
@@ -42,7 +43,7 @@ chmod +x awx-setup.sh
 To install AWX into your Kubernetes cluster:
 
 ```bash
-./awx-setup.sh deploy-awx
+./awx-setup.sh setup-awx
 ```
 
 This will:
@@ -61,18 +62,18 @@ To deploy container hosts with `deploy-hosts.yaml` :
 
 ### 4. Check Kubernetes Resources
 
-With the following command, you should be able to see first the creation of awx-operator ressources, then the creation of awx ressources created by the awx-operator.
+With the following command, you should be able to see first the creation of awx-operator kubernetes ressources, then the creation of awx kubernetes ressources created by the awx-operator.
 
 ```bash
-./awx-setup.sh k8s-status
+./awx-setup.sh watch-k8s
 ```
 
 ### 5. Check AWX Logs
 
-Once awx k8s ressources are running, you need follow logs of the AWX operator in order to know where the installation process is at:
+Once awx kubernetes ressources are running, you need follow logs of the AWX operator in order to know where the installation process is at:
 
 ```bash
-./awx-setup.sh awx-status
+./awx-setup.sh logs-awx
 ```
 
 ### 6. Get AWX Admin Credentials and Access URL
@@ -80,7 +81,7 @@ Once awx k8s ressources are running, you need follow logs of the AWX operator in
 Once the installation process is complete, you can retrieve the AWX admin password and the NodePort access URL with the following command:
 
 ```bash
-./awx-setup.sh get-vars
+./awx-setup.sh awx-access
 ```
 
 Then you can connect on awx !
