@@ -17,7 +17,7 @@ This script automates:
 - Cloning the AWX Operator repository
 - Setting up a namespace for AWX
 - Deploying AWX using manifests
-- Optionally deploying additional host configurations
+- Optionally deploying additional hosts
 - Retrieving admin credentials and NodePort access
 
 ## Setup Instructions
