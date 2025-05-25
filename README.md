@@ -9,7 +9,6 @@ This guide will walk you through setting up AWX, the web-based user interface fo
 (e.g., Minikube, Docker Desktop with Kubeadm ... but not a Kind cluster which require additionnal configuration)
 - `kubectl` installed and configured for your cluster
 - `git` installed
-- `uv`installed (Optional)
 
 ## Script Overview
 
@@ -17,7 +16,6 @@ This script automates:
 - Cloning the AWX Operator repository
 - Setting up a namespace for AWX
 - Deploying AWX using manifests
-- Optionally deploying additional hosts
 - Retrieving admin credentials and NodePort access
 
 ## Setup Instructions
@@ -52,15 +50,7 @@ This will:
 - Create a Kubernetes namespace called `awx`
 - Deploy AWX via Kustomize
 
-### 3. Deploy Hosts (Optional)
-
-To deploy container hosts with `deploy-hosts.yaml` :
-
-```bash
-./awx-setup.sh deploy-hosts
-```
-
-### 4. Check Kubernetes Resources
+### 3. Check Kubernetes Resources
 
 With the following command, you should be able to see first the creation of awx-operator kubernetes ressources, then the creation of awx kubernetes ressources created by the awx-operator.
 
@@ -68,7 +58,7 @@ With the following command, you should be able to see first the creation of awx-
 ./awx-setup.sh watch-k8s
 ```
 
-### 5. Check AWX Logs
+### 4. Check AWX Logs
 
 Once awx kubernetes ressources are running, you need follow logs of the AWX operator in order to know where the installation process is at:
 
@@ -76,7 +66,7 @@ Once awx kubernetes ressources are running, you need follow logs of the AWX oper
 ./awx-setup.sh logs-awx
 ```
 
-### 6. Get AWX Admin Credentials and Access URL
+### 5. Get AWX Admin Credentials and Access URL
 
 Once the installation process is complete, you can retrieve the AWX admin password and the NodePort access URL with the following command:
 

@@ -50,9 +50,6 @@ EOF
 		echo "[*] Applying manifests..."
 		kubectl apply -k .
 		;;
-	deploy-hosts)
-		kubectl apply -f deploy-hosts.yaml -n $NAMESPACE
-		;;
 	watch-k8s)
 		watch kubectl get all
 		;;
@@ -68,14 +65,9 @@ EOF
 		echo "[*] Getting NodePort for AWX..."
 		NODE_PORT=$(kubectl get svc -l "app.kubernetes.io/managed-by=awx-operator" -o jsonpath="{.items[?(@.metadata.name=='${AWX_NAME}-service')].spec.ports[0].nodePort}")
 		echo "AWX is accessible at: http://localhost:$NODE_PORT/"
-		echo "if you want to use add_hosts.py (with uv) execute the following commands:
-	export TOWER_HOST=http://localhost:$NODE_PORT/
-	awx login -k --conf.host http://localhost:$NODE_PORT/ --conf.username admin --conf.password $ADMIN_PASSWORD -f human
-you can then export the token and start the script by typing:
-	uv run add_hosts.py"
 		;;
 	*)
-		echo "Usage: $0 {setup-awx|deploy-hosts|watch-k8s|logs-awx|awx-access}"
+		echo "Usage: $0 {setup-awx|watch-k8s|logs-awx|awx-access}"
 		exit 1
 		;;
 esac
